@@ -1,0 +1,6 @@
+$pdf_mode = 1;
+$pdflatex = 'pdflatex -synctex=1 %O %s';
+$pdf_update_method = 2;
+$pdf_previewer = 'mupdf';
+$bibtext_use = 1;
+# vim:ft=perl

@@ -36,8 +36,6 @@ nnoremap <C-j> <C-W><C-j>
 nnoremap <C-k> <C-W><C-k>
 nnoremap <C-l> <C-W><C-l>
 nnoremap <C-h> <C-W><C-h>
-nnoremap <A-h> :bprev<CR>
-nnoremap <A-l> :bnext<CR>
 cabbrev w!! w !sudo tee > /dev/null %
 if has('nvim')
   tnoremap <C-j> <C-\><C-n><C-W><C-j>
@@ -73,7 +71,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-characterize'
 " }}}
 
 " for apperance {{{
@@ -170,11 +167,11 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'majutsushi/tagbar'
 Plug 'kassio/neoterm'
 Plug 'jreybert/vimagit'
-nmap <A-t> :rightbelow Ttoggle<CR>
-xmap <A-t> <C-\><C-n>:Ttoggle<CR>
+nmap <F10> :rightbelow Ttoggle<CR>
+tmap <F10> <C-\><C-n>:Ttoggle<CR>
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
-let g:neoterm_automap_keys = "<A-x>"
+let g:neoterm_automap_keys = "<C-x><C-x>"
 nmap gx <Plug>(neoterm-repl-send)
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
