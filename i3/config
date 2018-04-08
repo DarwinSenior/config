@@ -181,5 +181,5 @@ exec --no-startup-id /usr/bin/nm-applet
 exec --no-startup-id /usr/bin/pasystray
 exec --no-startup-id /usr/bin/blueman-applet
 exec_always --no-startup-id feh --bg-scale $HOME/.config/i3/wallpaper.jpg
+exec_always --no-startup-id "python3 $HOME/.config/i3/conky/i3-autoname-workspaces.py &"
 exec_always --no-startup-id "killall -q compton; compton --config $HOME/.config/i3/compton.conf"
-exec_always --no-startup-id "python $HOME/.config/i3/conky/i3-autoname-workspaces.py &"
