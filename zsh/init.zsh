@@ -38,9 +38,10 @@ export ENHANCD_DISABLE_DOT=1
 [ -x "$(command -v fasd)" ] && eval "$(fasd --init auto)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source /etc/profile.d/apps-bin-path.sh
 alias v='f -e nvim'
 alias vim="nvim"
+alias python="python3"
+alias pip="pip3"
 
 SEARCH_LIMIT=3
 alias wiki="googler -n $SEARCH_LIMIT -w wikipedia.org"
@@ -57,7 +58,7 @@ export PAGER='less'
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export PATH=$PATH:$HOME/.local/bin:$HOME/.local/npm/bin:$HOME/.pub-cache/bin:$HOME/workspace/hobby/flutter/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/.local/npm/bin
 if which ruby >/dev/null && which gem >/dev/null; then
     PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi

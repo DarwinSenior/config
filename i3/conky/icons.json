@@ -1,0 +1,18 @@
+{
+  "chromium": "chrome",
+  "chromium-browser": "chrome",
+  "firefox": "firefox",
+  "slack": "slack",
+  "feh": "picture-o",
+  "spotify": "spotify",
+  "mupdf": "file-pdf-o",
+  "gnome-terminal": "terminal",
+  "mailspring": "envelope",
+  "blender": "cube",
+  "skype": "skype",
+  "steam": "steam",
+  "mendeley desktop": "book",
+  "matlab": "code",
+  "sxiv": "picture-o",
+  "mplayer": "file-video-o"
+}

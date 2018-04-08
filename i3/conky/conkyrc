@@ -1,0 +1,13 @@
+background no
+out_to_x no
+out_to_console yes
+update_interval 0.5
+total_run_times 0
+use_spacer none
+
+
+TEXT
+↑${upspeed wlp1s0}|↓${downspeed wlp1s0}  \
+CPU ${cpu cpu0}% ${exec sensors | awk '/Package id 0/ {print $4}'}  \
+${time %a %b %d} \
+${time %H:%M}

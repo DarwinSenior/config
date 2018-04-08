@@ -1,2 +1,7 @@
 fzf/
 chromium/
+tags
+nvim/plug/
+.ropeproject
+__pycache__
+*.pyc
