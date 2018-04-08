@@ -5,3 +5,5 @@ nvim/plug/
 .ropeproject
 __pycache__
 *.pyc
+*.pyo
+tmux/plugins/
