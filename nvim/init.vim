@@ -1,3 +1,6 @@
+let mapleader=' '
+
+let g:newtrw_browserx_viewer = 'xdg-open'
 " reasonable settings {{{
 set laststatus=2
 set wildmenu
@@ -70,7 +73,12 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-projectionist'
+cabbrev a A
+cabbrev as AS
+cabbrev av AV
+cabbrev at AT
 Plug 'tpope/vim-dispatch'
+cabbrev d Dispatch
 " }}}
 
 " for apperance {{{
@@ -143,24 +151,30 @@ nmap <silent> <leader>s :ArgWrap<CR>
 " }}}
 
 " navigation {{{
+Plug 'hecal3/vim-leader-guide'
+nnoremap <silent> <leader> :<c-u>LeaderGuide '<space>'<cr>
+nnoremap <silent> <C-p> :<c-u>LeaderGuide '<C-p>'<cr>
 Plug 'rbgrouleff/bclose.vim'
 Plug 'junegunn/vim-slash'
 Plug 'google/vim-searchindex'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'kopischke/vim-stay'
 Plug 'dyng/ctrlsf.vim'
 nmap <C-f> <Plug>CtrlSFPrompt
 let g:ctrlsf_regex_pattern = 1
 let g:ctrlsf_auto_close = 0
 let g:ranger_map_keys = 0
+Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 nnoremap <C-p>f :Files<CR>
 nnoremap <C-p>b :Buffers<CR>
 nnoremap <C-p>g :GFiles<CR>
 nnoremap <C-p>r :Ranger<CR>
 nnoremap <C-p>m :Marks<CR>
 Plug 'qpkorr/vim-bufkill'
-let g:BufKillCreateMappigs = 0
-Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+let g:BufKillCreateMappings = 0
+cabbrev bd BD
+cabbrev bun BUN
 Plug 'francoiscabrol/ranger.vim'
 Plug 'roman/golden-ratio'
 " let g:golden_ratio_autocommand = 0
@@ -169,28 +183,27 @@ Plug 'roman/golden-ratio'
 
 " utils {{{
 Plug 'majutsushi/tagbar'
+cabbrev tb TagbarToggle
 Plug 'kassio/neoterm'
 Plug 'jreybert/vimagit'
+cabbrev m Magit
+
 nmap <F10> :rightbelow Ttoggle<CR>
 tmap <F10> <C-\><C-n>:Ttoggle<CR>
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_automap_keys = "<C-x><C-x>"
-nmap gx <Plug>(neoterm-repl-send)
-xmap gx <Plug>(neoterm-repl-send)
-nmap gxx <Plug>(neoterm-repl-send-line)
 for i in ['', 1, 2, 3, 4, 5, 6, 7, 8, 9]
   execute "nnoremap ".i."! :".i."T<space>"
 endfor
 Plug 'SirVer/ultisnips'
-Plug 'jceb/emmet.snippets'
 let g:UltiSnipsExpandTrigger = '<C-k>'
 let g:UltiSnipsJumpForwardTrigger = '<C-k>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-j>'
 let g:UltiSnipsEditSplit = 'vertical'
-" Plug 'pgilad/vim-skeletons'
-" let skeletons#skeletonsDir = '~/.config/nvim/snippets/skeletons'
-" let skeletons#autoRegister = 1
+let g:UltiSnipsSnippetsDir='~/.config/nvim/snippets/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'jceb/emmet.snippets'
 Plug 'diepm/vim-rest-console'
 " }}}
 
@@ -264,8 +277,8 @@ set background=dark
 silent! colorscheme one
 call one#highlight('Folded', '888888', 'none', 'bold')
 call one#highlight('Matchmaker', 'none', '444444', 'none')
-call one#highlight('Conceal', 'none', 'none', 'bold')
-call one#highlight('ExtraWhiteSpace', 'none', '000000', 'none')
+call one#highlight('Conceal', 'none', 'none', 'none')
+call one#highlight('ExtraWhiteSpace', 'none', 'none', 'none')
 " }}}
 
 augroup folding
