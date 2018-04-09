@@ -67,6 +67,11 @@ call plug#begin('~/.config/nvim/plug')
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
+cabbrev gw Gwrite
+cabbrev gr Gread
+cabbrev gs Gstatus
+cabbrev gc Gcommit
+cabbrev gp Gpull
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
