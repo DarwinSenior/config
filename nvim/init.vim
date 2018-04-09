@@ -39,7 +39,7 @@ nnoremap <C-j> <C-W><C-j>
 nnoremap <C-k> <C-W><C-k>
 nnoremap <C-l> <C-W><C-l>
 nnoremap <C-h> <C-W><C-h>
-cabbrev w!! w !sudo tee > /dev/null %
+call util#cabbrev('w!!', 'w !sudo tee > /dev/null %')
 if has('nvim')
   tnoremap <C-j> <C-\><C-n><C-W><C-j>
   tnoremap <C-k> <C-\><C-n><C-W><C-k>
@@ -78,12 +78,13 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-projectionist'
-cabbrev a A
-cabbrev as AS
-cabbrev av AV
-cabbrev at AT
+let g:projectionist_heuristics = json_decode(join(readfile(expand('~/.config/nvim/projection.json'))))
+call util#cabbrev('a', 'A')
+call util#cabbrev('as', 'AS')
+call util#cabbrev('at', 'AT')
+call util#cabbrev('av', 'AV')
 Plug 'tpope/vim-dispatch'
-cabbrev d Dispatch
+call util#cabbrev('d', 'Dispatch')
 " }}}
 
 " for apperance {{{
@@ -178,8 +179,8 @@ nnoremap <C-p>r :Ranger<CR>
 nnoremap <C-p>m :Marks<CR>
 Plug 'qpkorr/vim-bufkill'
 let g:BufKillCreateMappings = 0
-cabbrev bd BD
-cabbrev bun BUN
+call util#cabbrev('bd', 'BD')
+call util#cabbrev('bun', 'BUN')
 Plug 'francoiscabrol/ranger.vim'
 Plug 'roman/golden-ratio'
 " let g:golden_ratio_autocommand = 0
@@ -188,19 +189,16 @@ Plug 'roman/golden-ratio'
 
 " utils {{{
 Plug 'majutsushi/tagbar'
-cabbrev tb TagbarToggle
+call util#cabbrev('tb', 'TagbarToggle')
 Plug 'kassio/neoterm'
 Plug 'jreybert/vimagit'
-cabbrev m Magit
+call util#cabbrev('m', 'Magit')
 
 nmap <F10> :rightbelow Ttoggle<CR>
 tmap <F10> <C-\><C-n>:Ttoggle<CR>
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_automap_keys = "<C-x><C-x>"
-for i in ['', 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  execute "nnoremap ".i."! :".i."T<space>"
-endfor
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger = '<C-k>'
 let g:UltiSnipsJumpForwardTrigger = '<C-k>'
@@ -288,5 +286,5 @@ call one#highlight('ExtraWhiteSpace', 'none', 'none', 'none')
 
 augroup folding
   autocmd!
-  autocmd BufEnter * set foldtext=util#FoldText()
+  autocmd BufEnter * set foldtext=util#foldtext()
 augroup END

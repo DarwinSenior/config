@@ -1,5 +1,13 @@
+function! s:single_quote(str)
+  return "'".substitute(copy(a:str), "'", "''", 'g')."'"
+endfunction
 
-function! util#FoldText()
+function! util#cabbrev(key, value)
+  exec printf('cabbrev <expr> %s (getcmdtype() == ":" && getcmdpos() <= %d) ? %s : %s',
+        \ a:key, 1+len(a:key), s:single_quote(a:value), s:single_quote(a:key))
+endfunction
+
+function! util#foldtext()
   let l:lpadding = &foldcolumn
   redir => l:signs
   execute 'silent sign place buffer='.bufnr('%')
