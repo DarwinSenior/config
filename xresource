@@ -1,0 +1,63 @@
+!------------------------------------------------------------------------------
+! URxvt configs
+!------------------------------------------------------------------------------
+
+URxvt.geometry:        72x18
+URxvt*letterSpace:     0
+URxvt.lineSpace:       0
+URxvt*internalBorder:  24
+URxvt*externalBorder:  0
+URxvt*depth:           32
+URxvt*saveline:        2000
+URxvt*termName:        rxvt-256color
+URxvt*iso14755:        false
+URxvt*scrollBar:       false
+URxvt*scrollBar_right: false
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.copyCommand:     xclip -i -selection clipboard
+URxvt.pasteCommand:    xclip -o -selection clipboard
+URxvt.keysym.M-c:      perl:clipboard:copy
+URxvt.keysym.M-v:      perl:clipboard:paste
+URxvt.keysym.M-C-v:    perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down:command:\033]721;1\007
+URxvt.keysym.M-s:      perl:keyboard-select:search
+URxvt.keysym.M-u:      perl:url-select:select_next
+URxvt.urlLauncher:     firefox
+URxvt.underlineURLs:   true
+URxvt.urlButton:       1
+URxvt*buffered:        false
+URxvt.urgentOnBell:    True
+
+!------------------------------------------------------------------------------
+! Xft Font Configuration
+!------------------------------------------------------------------------------
+
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+! fonts
+URxvt*font:           xft:Inconsolata Nerd Font:regular:size=12
+URxvt*boldFont:       xft:Inconsolata Nerd Font:bold:size=12
+URxvt*italicFont:     xft:Inconsolata Nerd Font:italic:size=12
+URxvt*boldItalicFont: xft:Inconsolata Nerd Font:bold italic:size=12
+
+! rofi
+rofi.color-enabled: true
+rofi.color-window: #2f343f, #2f343f, #2f343f
+rofi.color-normal: #2f343f, #d8dee8, #2f343f, #2f343f, #bf616a
+rofi.color-active: #2f343f, #b48ead, #2f343f, #2f343f, #93e5cc
+rofi.color-urgent: #2f343f, #ebcb8b, #2f343f, #2f343f, #ebcb8b
+rofi.drun-icon-theme: Numix-Circle
+
+! dmenu
+dmenu.selforeground: #474c57
+dmenu.background:    #ffffff
+dmenu.selbackground: #4ec2e8
+dmenu.foreground:    #474c57
+! vim:ft=xdefaults

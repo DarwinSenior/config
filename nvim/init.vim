@@ -103,6 +103,7 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " for text manipulation {{{
 " enhancement
+Plug 'christoomey/vim-sort-motion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
@@ -138,7 +139,7 @@ Plug 'wellle/targets.vim'
 let g:targets_argOpening = '[({[]'
 let g:targets_argClosing = '[]})]'
 Plug 'FooSoft/vim-argwrap'
-nmap <silent> gs :ArgWrap<CR>
+nmap <silent> <leader>s :ArgWrap<CR>
 " }}}
 
 " navigation {{{
@@ -161,6 +162,9 @@ let g:BufKillCreateMappigs = 0
 Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
+Plug 'roman/golden-ratio'
+" let g:golden_ratio_autocommand = 0
+" nmap <C-W>g <Plug>(golden_ratio_resize)
 " }}}
 
 " utils {{{
@@ -184,9 +188,9 @@ let g:UltiSnipsExpandTrigger = '<C-k>'
 let g:UltiSnipsJumpForwardTrigger = '<C-k>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-j>'
 let g:UltiSnipsEditSplit = 'vertical'
-Plug 'pgilad/vim-skeletons'
-let skeletons#skeletonsDir = '~/.config/nvim/snippets/skeletons'
-let skeletons#autoRegister = 1
+" Plug 'pgilad/vim-skeletons'
+" let skeletons#skeletonsDir = '~/.config/nvim/snippets/skeletons'
+" let skeletons#autoRegister = 1
 Plug 'diepm/vim-rest-console'
 " }}}
 
