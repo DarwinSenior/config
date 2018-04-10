@@ -22,6 +22,7 @@ if has('termguicolors')
   set termguicolors
 endif
 
+set wrapscan
 set ignorecase
 set smartcase
 set hlsearch
@@ -34,6 +35,7 @@ set autoread
 set noswapfile
 set nobackup
 set nowritebackup
+set showcmd
 
 nnoremap <C-j> <C-W><C-j>
 nnoremap <C-k> <C-W><C-k>
@@ -47,10 +49,16 @@ if has('nvim')
   tnoremap <C-h> <C-\><C-n><C-W><C-h>
   autocmd BufEnter term://* startinsert
 endif
+nnoremap Q @q
+nnoremap gV `[v`]
+map q: <nop>
+map q/ <nop>
+map q? <nop>
 
 set wrap
 set linebreak
-set nolist
+set list
+set listchars=trail:·,tab:‣\ ,extends:…
 set iskeyword+=-
 set iskeyword-=/
 
@@ -98,16 +106,16 @@ let g:airline_theme = 'one'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:ariline#extensions#tabline#tab_nr_type = 1
-let g:airline#extensions#nrrwrgn#enabled = 1
 let g:airline#extensions#capslock#enabled = 1
 let g:airline#extensions#wordcount#enabled = 1
-let g:airline#extensions#vimtex#enabled = 1
 Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
 Plug 'ap/vim-css-color'
-Plug 'miyakogi/seiya.vim'
-Plug 'airblade/vim-gitgutter'
-let g:gitgutter_map_keys = 0
-let g:gitgutter_realtime = 0
+Plug 'mhinz/vim-signify'
+let g:signify_sign_delete = '-'
+let g:signify_sign_change = '~'
+nnoremap <F2> :call util#synstack()<cr>
+
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-highlightedyank'
 Plug 'qstrahl/vim-matchmaker'
@@ -117,24 +125,28 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " for text manipulation {{{
 " enhancement
-Plug 'christoomey/vim-sort-motion'
+Plug 'kana/vim-niceblock' " I gI and A in visual mode
 Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-Plug 'benjifisher/matchit.zip'
 Plug 'sickill/vim-pasta'
 Plug 'ntpeters/vim-better-whitespace'
 autocmd BufWritePre * StripWhitespace
 Plug 'airblade/vim-matchquote'
+Plug 'rhysd/conflict-marker.vim' " [x ]x ct co
 " operator
-Plug 'tommcdo/vim-exchange'
+Plug 'arecarn/vim-selection'
+Plug 'christoomey/vim-sort-motion' " gs
+Plug 'junegunn/vim-easy-align' " ga
+Plug 'arecarn/vim-crunch' " g=
+Plug 'kana/vim-operator-user'
+Plug 'tommcdo/vim-exchange' " cx
 Plug 'justinmk/vim-sneak'
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 map T <Plug>Sneak_T
-Plug 'kana/vim-operator-replace'
+Plug 'kana/vim-operator-replace' "gr
 map gr <Plug>(operator-replace)
 Plug 'haya14busa/vim-asterisk'
 map * <Plug>(asterisk-z*)
@@ -144,12 +156,15 @@ map g# <Plug>(asterisk-gz#)
 Plug 'haya14busa/vim-poweryank'
 map <leader>y <Plug>(operator-poweryank-osc52)
 " text object
-Plug 'kana/vim-operator-user'
-Plug 'reedes/vim-textobj-sentence', {'for': ['tex', 'markdown', 'pandoc', 'text']}
-Plug 'junegunn/vim-after-object'
-Plug 'michaeljsmith/vim-indent-object'
-autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
+Plug 'kana/vim-textobj-user'
 Plug 'wellle/targets.vim'
+Plug 'glts/vim-textobj-comment' " ic ac
+Plug 'reedes/vim-textobj-sentence', {'for': ['tex', 'markdown', 'pandoc', 'text']}
+Plug 'michaeljsmith/vim-indent-object' "ii ai iI aI
+Plug 'Julian/vim-textobj-variable-segment' "iv av
+Plug 'sgur/vim-textobj-parameter' "i, a,
+Plug 'junegunn/vim-after-object' "a= a: a- a# a<space>
+autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
 let g:targets_argOpening = '[({[]'
 let g:targets_argClosing = '[]})]'
 Plug 'FooSoft/vim-argwrap'
@@ -157,14 +172,21 @@ nmap <silent> <leader>s :ArgWrap<CR>
 " }}}
 
 " navigation {{{
+Plug 'Konfekt/FastFold'
+let g:fastfold_fold_movement_commands = [']z', '[z']
+Plug 'arecarn/vim-fold-cycle'
+let g:fold_cycle_default_mapping = 0 "disable default mappings
+nmap <Tab><Tab> <Plug>(fold-cycle-open)
+nmap <S-Tab><S-Tab> <Plug>(fold-cycle-close)
 Plug 'hecal3/vim-leader-guide'
 nnoremap <silent> <leader> :<c-u>LeaderGuide '<space>'<cr>
 nnoremap <silent> <C-p> :<c-u>LeaderGuide '<C-p>'<cr>
-Plug 'rbgrouleff/bclose.vim'
 Plug 'junegunn/vim-slash'
 Plug 'google/vim-searchindex'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kopischke/vim-stay'
+Plug 'airblade/vim-rooter'
+let g:rooter_manual_only = 1
 Plug 'dyng/ctrlsf.vim'
 nmap <C-f> <Plug>CtrlSFPrompt
 let g:ctrlsf_regex_pattern = 1
@@ -190,10 +212,12 @@ Plug 'roman/golden-ratio'
 " utils {{{
 Plug 'majutsushi/tagbar'
 call util#cabbrev('tb', 'TagbarToggle')
-Plug 'kassio/neoterm'
 Plug 'jreybert/vimagit'
 call util#cabbrev('m', 'Magit')
-
+Plug 'cohama/agit.vim'
+call util#cabbrev('ag', 'Agit')
+Plug 'benmills/vimux'
+Plug 'kassio/neoterm'
 nmap <F10> :rightbelow Ttoggle<CR>
 tmap <F10> <C-\><C-n>:Ttoggle<CR>
 let g:neoterm_autoinsert = 1
@@ -205,20 +229,33 @@ let g:UltiSnipsJumpForwardTrigger = '<C-k>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-j>'
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsSnippetsDir='~/.config/nvim/snippets/ultisnips'
+let g:UltiSnipsSnippetDirectories=['plug/vim-snippets/UltiSnips' , 'plug/emmet.snippets/ultisnips']
 Plug 'honza/vim-snippets'
 Plug 'jceb/emmet.snippets'
-Plug 'diepm/vim-rest-console'
+Plug 'diepm/vim-rest-console', {'for': ['rest']}
+Plug 'metakirby5/codi.vim'
+let g:codi#autocmd = 'BufferWritePost'
+let g:codi#rightalign = 0
 " }}}
 
 " file syntax {{{
+Plug 'vim-scripts/SyntaxRange'
 Plug 'Shougo/context_filetype.vim'
+Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown']}
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['markdown']}
+let g:pandoc#folding#use_foldext = 0
+augroup pandoc_syntax
+  autocmd! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
 Plug 'vyzyv/vimpyter', { 'for': ['ipynb'] }
 Plug 'jparise/vim-graphql', { 'for': ['javascript', 'typescript', 'vue'] }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp'] }
+Plug 'bbchung/Clamp', {'for': ['c', 'cpp']}
 Plug 'othree/html5.vim', { 'for': ['html', 'vue'] }
 Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss', 'vue'] }
 Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss', 'vue'] }
 Plug 'digitaltoad/vim-pug', {'for': ['pug', 'vue']}
+Plug 'othree/yajs.vim', {'for': ['javascript']}
 Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'vue']}
 Plug 'kh3phr3n/python-syntax', {'for': ['python']}
 let g:python_highlight_all = 1
@@ -233,9 +270,12 @@ Plug 'plasticboy/vim-markdown', {'for': ['markdown']}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': ['i3']}
 Plug 'stephpy/vim-yaml', {'for': ['yaml']}
 Plug 'dzeban/vim-log-syntax', {'for': ['log']}
+Plug 'chiphogg/vim-prototxt', {'for': ['prototxt']}
 Plug 'neomutt/neomutt.vim', {'for': ['mutt']}
 Plug 'keith/tmux.vim', {'for': ['tmux']}
-Plug 'chrisbra/NrrwRgn'
+Plug 'chrisbra/NrrwRgn' "<leader>nr
+Plug 'neomutt/neomutt.vim'
+let g:airline#extensions#nrrwrgn#enabled = 1
 " }}}
 
 " coding {{{
@@ -253,22 +293,53 @@ Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
+let g:LanguageClient_serverCommands = {
+      \ 'lua': ['lua-lsp'],
+      \ 'dart': ['dart_language_server'],
+      \ 'ruby': ['language_server-ruby'],
+      \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+      \ 'javascript': ['javascript-typescript-stdio'],
+      \ 'typescript': ['javascript-typescript-stdio'],
+      \ 'json': ['json-languageserver', '--stdio'],
+      \ 'haskell': ['hie', '--lsp'],
+      \ 'go': ['go-langserver'],
+      \ 'python': ['pyls'],
+      \ 'vue': ['vls'],
+      \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
+      \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+      \ 'cuda': ['cquery', '--log-file=/tmp/cq.log'],
+      \}
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath = expand('~/.config/nvim/settings.json')
 Plug 'w0rp/ale'
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = 'never'
 " }}}
 
 " writing {{{
+Plug 'arecarn/vim-spell-utils'
+Plug 'mechatroner/rainbow_csv', {'for': ['csv', 'tsv']}
+Plug 'dkarter/bullets.vim'
+let g:bullets_enabled_file_types = [
+      \ 'markdown',
+      \ 'text',
+      \ 'gitcommit',
+      \ 'scratch',
+      \ 'org',
+      \]
 Plug 'vimscript/VOoM'
-Plug 'vim-pandoc/vim-pandoc', {'for': ['markdown']}
-Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['markdown']}
+" Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-Plug 'godlygeek/tabular'
 let g:pandoc#folding#use_foldtext = 1
-augroup pandoc_syntax
-  autocmd! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-augroup END
 Plug 'matze/vim-tex-fold', {'for': ['tex']}
 Plug 'lervag/vimtex', {'for': ['tex']}
+let g:airline#extensions#vimtex#enabled = 1
 let g:vimtex_view_method = 'mupdf'
+let g:vimtex_fold_enabled = 1
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': ['tex', 'markdown']}
+set conceallevel=2
+let g:tex_conceal="abdgm"
 " }}}
 
 call plug#end()

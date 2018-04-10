@@ -1,0 +1,17 @@
+{
+  "~/.config/nvim/init.vim": {
+    "type": "nvim"
+  },
+  "~/.config/nvim/ftplugin/*.vim": {
+    "type": "nvimft"
+  },
+  "*.py": {
+    "type": "py",
+    "dispatch": "python {file}"
+  },
+  "*.md": {
+    "type": "md",
+    "dispatch": "pandoc {file} -o {}.pdf"
+  }
+}
+
