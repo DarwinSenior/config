@@ -113,9 +113,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+BackSpace exec $HOME/.config/i3/i3lock-fancy-multimonitor/lock
-bindsym $mod+Shift+BackSpace exec dm-tool switch-to-greeter
-bindsym $mod+Shift+Delete exec i3-msg exit
+bindsym $mod+Shift+l exec $HOME/.config/i3/i3lock-fancy/lock
+
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
@@ -175,6 +174,7 @@ client.background       #111111
 
 #:::::::::::::::::::::::: Settings for gaps window ::::::::::::::::::::::::::::#
 
+exec --no-startup-id xautoloack -time 15 -locker $HOME/.config/i3/i3lock-fancy/lock
 exec --no-startup-id /usr/bin/xrandr --output eDP1 --mode 1600x900 --output HDMI2 --auto --right-of eDP1
 exec --no-startup-id /usr/bin/xfce4-power-manager
 exec --no-startup-id /usr/bin/nm-applet
@@ -185,7 +185,7 @@ exec --no-startup-id /usr/bin/xfce4-volumed
 exec --no-startup-id /usr/bin/xbindkeys_autostart
 exec --no-startup-id /usr/lib/notification-daemon/notification-daemon
 exec --no-startup-id /usr/bin/dunst -config $HOME/.config/i3/dunstrc
-exec xrdb -merge .config/xresource
+exec --no-startup-id /usr/bin/xrdb -merge .config/xresource
 exec_always --no-startup-id feh --bg-scale $HOME/.config/i3/wallpaper.jpg
 exec_always --no-startup-id "python3 $HOME/.config/i3/conky/i3-autoname-workspaces.py &"
 exec_always --no-startup-id "killall -q compton; compton --config $HOME/.config/i3/compton.conf"

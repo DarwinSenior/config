@@ -1,3 +1,10 @@
+function! util#synstack()
+  if !exists('*synstack')
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
 function! s:single_quote(str)
   return "'".substitute(copy(a:str), "'", "''", 'g')."'"
 endfunction
